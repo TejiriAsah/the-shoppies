@@ -1,7 +1,7 @@
 .input {
-  background-color: white;
+  background-color: #e4dfda;
   height: 10rem;
-
+  border-radius: 10px;
   &__label {
     display: block;
     font-weight: 600;
@@ -18,7 +18,6 @@
     margin: 0 1.5rem;
     padding: 0 1rem;
     border: 1px solid grey;
-    // border-radius: 20px;
     box-sizing: border-box;
   }
 }
