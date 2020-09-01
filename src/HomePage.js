@@ -15,35 +15,50 @@ class HomePage extends React.Component {
     this.state = {
       movies: [],
       nominatedMovies: [],
+      error: "",
     };
   }
   searchInput = (movie) => {
-    axios
-      .get(
-        "http://www.omdbapi.com/?apikey=" +
-          { api_key } +
-          "&type=movie&s=" +
-          { movie }
-      )
-      .then((response) => {
-        const searchResults = response.slice(0, 5);
-        this.setState({
-          movies: searchResults,
-        });
-      })
-      .catch((error) => console.log("error", error));
+    // axios
+    //   .get(
+    //     "http://www.omdbapi.com/?apikey=" + api_key + "&type=movie&s=" + movie
+    //   )
+    //   .then((response) => {
+    //     console.log("your response", response);
+    //     const searchResponse = response.data.Search;
+    //     if (
+    //       typeof searchResponse !== "undefined" &&
+    //       searchResponse.length > 0
+    //     ) {
+    //       const searchResults = searchResponse.slice(0, 5);
+    //       this.setState({
+    //         movies: searchResults,
+    //       });
+    //     } else if (response.data.Error && response.data.Error.length > 0) {
+    //       this.setState({
+    //         error: response.data.Error,
+    //       });
+    //     }
+    //   })
+    //   .catch((error) => console.log("error", error));
+    console.log("here");
   };
 
   render() {
+    const movies = this.state.movies;
     return (
       <div className="test">
         <h1>The Shoppies</h1>
-        <SearchBar />
+        <SearchBar search={this.searchInput} />
         <div className="testview">
           <div className="results">
-            <Movies />
-            <Movies />
-            <Movies />
+            {this.state.error.length > 0 ? (
+              <p>{this.state.error}</p>
+            ) : (
+              movies.map((movie) => {
+                return <Movies title={movie.title} year={movie.year} />;
+              })
+            )}
           </div>
 
           <Nominations />
