@@ -1,6 +1,10 @@
 .nominations {
   &__container {
     background-color: green;
-    width: 50%;
+    width: 45%;
+    height: 30rem;
+  }
+  &__heading {
+    margin-left: 2rem;
   }
 }
