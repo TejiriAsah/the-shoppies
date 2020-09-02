@@ -48,3 +48,15 @@
   width: 100%;
   border-radius: 20px;
 }
+.nominations {
+  &__container {
+    background-color: #e78f8e;
+    width: 50%;
+    border-radius: 10px;
+    height: 31rem;
+  }
+  &__heading {
+    margin-left: 2rem;
+    font-size: 2.25rem;
+  }
+}

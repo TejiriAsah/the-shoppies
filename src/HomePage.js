@@ -1,11 +1,9 @@
 import React from "react";
 import axios from "axios";
 import moviegif from "./assets/movie.gif";
-// import searchIcon from "./assets/search-24px.svg";
-
 import Movies from "./components/movies/Movies";
-
 import Nominations from "./components/nominations/Nominations";
+
 import "./homePage.scss";
 
 const api_key = "b7123901";
@@ -30,6 +28,16 @@ class HomePage extends React.Component {
   search = () => {
     let movie = this.state.movie;
     this.searchInput(movie);
+  };
+
+  nominate = (movie) => {
+    let selectedMovies = this.state.nominatedMovies;
+    if (selectedMovies.length < 5) {
+      selectedMovies.push(movie);
+      this.setState({
+        nominatedMovies: selectedMovies,
+      });
+    }
   };
 
   searchInput = (movie) => {
@@ -60,6 +68,8 @@ class HomePage extends React.Component {
 
   render() {
     const movies = this.state.movies;
+    const nominations = this.state.nominatedMovies;
+
     return (
       <div className="test">
         <h1>The Shoppies</h1>
@@ -85,13 +95,30 @@ class HomePage extends React.Component {
                     year={movie.Year}
                     poster={movie.Poster}
                     key={movie.imdbID}
+                    nominate={() => {
+                      this.nominate(movie);
+                    }}
                   />
                 );
               })
             )}
           </div>
-
-          <Nominations />
+          <div className="nominations__container">
+            {/* <h2 className="nominations__heading"> Nominations </h2> */}
+            {nominations.map((movie) => {
+              return (
+                <Nominations
+                  title={movie.Title}
+                  year={movie.Year}
+                  poster={movie.Poster}
+                  key={movie.imdbID}
+                  nominate={() => {
+                    this.nominate(movie);
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
         <img src={moviegif} alt="movie-gif" className="movie-gif" />
       </div>
