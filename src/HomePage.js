@@ -3,6 +3,7 @@ import axios from "axios";
 import moviegif from "./assets/movie.gif";
 import Movies from "./components/movies/Movies";
 import Nominations from "./components/nominations/Nominations";
+import Error from "./components/error/Error";
 
 import "./homePage.scss";
 
@@ -38,14 +39,34 @@ class HomePage extends React.Component {
     this.setState({
       nominatedMovies: filteredMovies,
     });
+    // this.displayBanner();
+    document.getElementById(movie.imdbID).disabled = false;
+    console.log(this.state.nominatedMovies);
+    this.displayBanner();
   };
 
   nominate = (movie) => {
     let selectedMovies = this.state.nominatedMovies;
+
     if (selectedMovies.length < 5) {
       selectedMovies.push(movie);
       this.setState({
         nominatedMovies: selectedMovies,
+        error: "",
+      });
+      document.getElementById(movie.imdbID).disabled = true;
+    }
+    this.displayBanner();
+  };
+
+  displayBanner = () => {
+    if (this.state.nominatedMovies.length === 5) {
+      this.setState({
+        error: "YOU HAVE 5 NOMINATIONS!",
+      });
+    } else {
+      this.setState({
+        error: "",
       });
     }
   };
@@ -65,6 +86,7 @@ class HomePage extends React.Component {
           const searchResults = searchResponse.slice(0, 5);
           this.setState({
             movies: searchResults,
+            error: "",
           });
         } else if (response.data.Error && response.data.Error.length > 0) {
           this.setState({
@@ -83,7 +105,6 @@ class HomePage extends React.Component {
     return (
       <div className="test">
         <h1>The Shoppies</h1>
-        {/* <img src={searchIcon} alt="search" className="search__icon" /> */}
         <input
           type="text"
           className="input__field"
@@ -93,14 +114,15 @@ class HomePage extends React.Component {
         <button onClick={this.search} className="nominate_btn">
           search
         </button>
-        <div className="testview">
-          <div className="results">
-            {this.state.error.length > 0 ? (
-              <p>{this.state.error}</p>
-            ) : (
-              movies.map((movie) => {
+        {this.state.error.length > 0 && <Error error={this.state.error} />}
+        {(this.state.movies.length > 0 ||
+          this.state.nominatedMovies.length > 0) && (
+          <div className="testview">
+            <div className="results">
+              {movies.map((movie) => {
                 return (
                   <Movies
+                    imdbID={movie.imdbID}
                     title={movie.Title}
                     year={movie.Year}
                     poster={movie.Poster}
@@ -110,26 +132,26 @@ class HomePage extends React.Component {
                     }}
                   />
                 );
-              })
-            )}
+              })}
+            </div>
+            <div className="nominations__container">
+              {/* <h2 className="nominations__heading"> Nominations </h2> */}
+              {nominations.map((movie) => {
+                return (
+                  <Nominations
+                    title={movie.Title}
+                    year={movie.Year}
+                    poster={movie.Poster}
+                    key={movie.imdbID}
+                    remove={() => {
+                      this.remove(movie);
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
-          <div className="nominations__container">
-            {/* <h2 className="nominations__heading"> Nominations </h2> */}
-            {nominations.map((movie) => {
-              return (
-                <Nominations
-                  title={movie.Title}
-                  year={movie.Year}
-                  poster={movie.Poster}
-                  key={movie.imdbID}
-                  remove={() => {
-                    this.remove(movie);
-                  }}
-                />
-              );
-            })}
-          </div>
-        </div>
+        )}
         <img src={moviegif} alt="movie-gif" className="movie-gif" />
       </div>
     );

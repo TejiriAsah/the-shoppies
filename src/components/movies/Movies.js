@@ -12,7 +12,11 @@ const Movies = (props) => {
           <span className="nomination-item">
             {props.title + " (" + props.year + ")"}
           </span>
-          <button className="nominate_btn" onClick={props.nominate}>
+          <button
+            id={props.imdbID}
+            className="nominate_btn"
+            onClick={props.nominate}
+          >
             Nominate
           </button>
         </div>
