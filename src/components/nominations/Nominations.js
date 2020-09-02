@@ -12,7 +12,7 @@ const Nominations = (props) => {
           <span className="nomination-item">
             {props.title + " (" + props.year + ")"}
           </span>
-          <button className="nominate_btn" onClick={props.nominate}>
+          <button className="nominate_btn" onClick={props.remove}>
             Remove
           </button>
         </div>

@@ -30,6 +30,16 @@ class HomePage extends React.Component {
     this.searchInput(movie);
   };
 
+  remove = (movie) => {
+    let nominatedMovies = this.state.nominatedMovies;
+    let filteredMovies = nominatedMovies.filter((nominatedMovie) => {
+      return movie.imdbID !== nominatedMovie.imdbID;
+    });
+    this.setState({
+      nominatedMovies: filteredMovies,
+    });
+  };
+
   nominate = (movie) => {
     let selectedMovies = this.state.nominatedMovies;
     if (selectedMovies.length < 5) {
@@ -112,8 +122,8 @@ class HomePage extends React.Component {
                   year={movie.Year}
                   poster={movie.Poster}
                   key={movie.imdbID}
-                  nominate={() => {
-                    this.nominate(movie);
+                  remove={() => {
+                    this.remove(movie);
                   }}
                 />
               );
