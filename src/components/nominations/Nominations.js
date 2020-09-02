@@ -10,7 +10,7 @@ class Nominations extends React.Component {
         <ul>
           <li>
             <span>results 1</span>
-            <button>Remove</button>
+            <button className="nominate_btn">Remove</button>
           </li>
           <li>results 2</li>
         </ul>

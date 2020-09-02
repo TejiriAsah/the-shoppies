@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
-import SearchBar from "./components/searchBar/SearchBar";
-// import SearchResults from "./components/searchResults/SearchResults";
+import moviegif from "./assets/movie.gif";
+// import searchIcon from "./assets/search-24px.svg";
+
 import Movies from "./components/movies/Movies";
 
 import Nominations from "./components/nominations/Nominations";
@@ -13,34 +14,47 @@ class HomePage extends React.Component {
   constructor() {
     super();
     this.state = {
+      movie: "",
       movies: [],
       nominatedMovies: [],
       error: "",
     };
   }
+
+  handleChange = (e) => {
+    this.setState({
+      movie: e.target.value,
+    });
+  };
+
+  search = () => {
+    let movie = this.state.movie;
+    this.searchInput(movie);
+  };
+
   searchInput = (movie) => {
-    // axios
-    //   .get(
-    //     "http://www.omdbapi.com/?apikey=" + api_key + "&type=movie&s=" + movie
-    //   )
-    //   .then((response) => {
-    //     console.log("your response", response);
-    //     const searchResponse = response.data.Search;
-    //     if (
-    //       typeof searchResponse !== "undefined" &&
-    //       searchResponse.length > 0
-    //     ) {
-    //       const searchResults = searchResponse.slice(0, 5);
-    //       this.setState({
-    //         movies: searchResults,
-    //       });
-    //     } else if (response.data.Error && response.data.Error.length > 0) {
-    //       this.setState({
-    //         error: response.data.Error,
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => console.log("error", error));
+    axios
+      .get(
+        "http://www.omdbapi.com/?apikey=" + api_key + "&type=movie&s=" + movie
+      )
+      .then((response) => {
+        console.log("your response", response);
+        const searchResponse = response.data.Search;
+        if (
+          typeof searchResponse !== "undefined" &&
+          searchResponse.length > 0
+        ) {
+          const searchResults = searchResponse.slice(0, 5);
+          this.setState({
+            movies: searchResults,
+          });
+        } else if (response.data.Error && response.data.Error.length > 0) {
+          this.setState({
+            error: response.data.Error,
+          });
+        }
+      })
+      .catch((error) => console.log("error", error));
     console.log("here");
   };
 
@@ -49,20 +63,37 @@ class HomePage extends React.Component {
     return (
       <div className="test">
         <h1>The Shoppies</h1>
-        <SearchBar search={this.searchInput} />
+        {/* <img src={searchIcon} alt="search" className="search__icon" /> */}
+        <input
+          type="text"
+          className="input__field"
+          placeholder="search for movies.."
+          onChange={this.handleChange}
+        />
+        <button onClick={this.search} className="nominate_btn">
+          search
+        </button>
         <div className="testview">
           <div className="results">
             {this.state.error.length > 0 ? (
               <p>{this.state.error}</p>
             ) : (
               movies.map((movie) => {
-                return <Movies title={movie.title} year={movie.year} />;
+                return (
+                  <Movies
+                    title={movie.Title}
+                    year={movie.Year}
+                    poster={movie.Poster}
+                    key={movie.imdbID}
+                  />
+                );
               })
             )}
           </div>
 
           <Nominations />
         </div>
+        <img src={moviegif} alt="movie-gif" className="movie-gif" />
       </div>
     );
   }
