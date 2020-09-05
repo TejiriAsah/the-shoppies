@@ -76,7 +76,7 @@ class HomePage extends React.Component {
   searchInput = (movie) => {
     axios
       .get(
-        "http://www.omdbapi.com/?apikey=" + api_key + "&type=movie&s=" + movie
+        "https://www.omdbapi.com/?apikey=" + api_key + "&type=movie&s=" + movie
       )
       .then((response) => {
         console.log("your response", response);
