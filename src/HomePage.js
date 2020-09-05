@@ -36,13 +36,15 @@ class HomePage extends React.Component {
     let filteredMovies = nominatedMovies.filter((nominatedMovie) => {
       return movie.imdbID !== nominatedMovie.imdbID;
     });
-    this.setState({
-      nominatedMovies: filteredMovies,
-    });
-    // this.displayBanner();
-    document.getElementById(movie.imdbID).disabled = false;
-    console.log(this.state.nominatedMovies);
-    this.displayBanner();
+    console.log("filtered", filteredMovies);
+
+    this.setState(
+      {
+        nominatedMovies: filteredMovies,
+        error: "",
+      },
+      console.log("nominated", this.state.nominatedMovies)
+    );
   };
 
   nominate = (movie) => {
@@ -111,10 +113,11 @@ class HomePage extends React.Component {
           placeholder="search for movies.."
           onChange={this.handleChange}
         />
-        <button onClick={this.search} className="nominate_btn">
+        <button onClick={this.search} className="share_btn">
           search
         </button>
         {this.state.error.length > 0 && <Error error={this.state.error} />}
+
         {(this.state.movies.length > 0 ||
           this.state.nominatedMovies.length > 0) && (
           <div className="testview">
