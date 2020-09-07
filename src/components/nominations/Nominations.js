@@ -1,5 +1,4 @@
 import React from "react";
-// import "../nominations/nominations.scss";
 
 const Nominations = (props) => {
   return (

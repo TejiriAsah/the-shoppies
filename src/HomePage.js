@@ -41,6 +41,7 @@ class HomePage extends React.Component {
       nominatedMovies: filteredMovies,
       error: "",
     });
+    document.getElementById(movie.imdbID).disabled = false;
   };
 
   nominate = (movie) => {
@@ -99,8 +100,8 @@ class HomePage extends React.Component {
     const nominations = this.state.nominatedMovies;
 
     return (
-      <div className="test">
-        <h1>The Shoppies</h1>
+      <div className="homePage">
+        <h1 className="homePage__heading">The Shoppies</h1>
         <input
           type="text"
           className="input__field"
@@ -114,8 +115,9 @@ class HomePage extends React.Component {
 
         {(this.state.movies.length > 0 ||
           this.state.nominatedMovies.length > 0) && (
-          <div className="testview">
+          <div className="table-view">
             <div className="results">
+              <h2 className="nominations__heading">Search Results</h2>
               {movies.map((movie) => {
                 return (
                   <Movies
@@ -132,7 +134,7 @@ class HomePage extends React.Component {
               })}
             </div>
             <div className="nominations__container">
-              {/* <h2 className="nominations__heading"> Nominations </h2> */}
+              <h2 className="nominations__heading"> Nominations </h2>
               {nominations.map((movie) => {
                 return (
                   <Nominations

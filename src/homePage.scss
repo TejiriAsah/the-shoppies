@@ -1,26 +1,23 @@
-.testview {
+.table-view {
   display: flex;
   justify-content: space-evenly;
   margin-top: 3rem;
 }
 
-.test {
+.homePage {
   padding-left: 2rem;
   padding-right: 2rem;
+  &__heading {
+    font-size: 3rem;
+    color: #e78f8e;
+  }
 }
 
 .results {
   background-color: #e78f8e;
   width: 50%;
   border-radius: 10px;
-  height: 33rem;
   margin-right: 5rem;
-  // &__heading {
-  //   margin-left: 2rem;
-  // }
-  // &__list {
-  //   margin-left: 2rem;
-  // }
 }
 .search__icon {
   position: absolute;
@@ -53,11 +50,10 @@
     background-color: #e78f8e;
     width: 50%;
     border-radius: 10px;
-    height: 33rem;
   }
   &__heading {
-    margin-left: 2rem;
-    font-size: 2.25rem;
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem 2rem;
   }
 }
 .share_btn {
