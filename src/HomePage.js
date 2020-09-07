@@ -143,7 +143,7 @@ class HomePage extends React.Component {
                 <a
                   className="nominations__shareLink"
                   href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fzen-keller-810803.netlify.app%2F"
-                  target="_blank"
+                  target="blank"
                 >
                   Share on Facebook ?
                 </a>
