@@ -41,7 +41,11 @@ class HomePage extends React.Component {
       nominatedMovies: filteredMovies,
       error: "",
     });
-    document.getElementById(movie.imdbID).disabled = false;
+
+    const nomination = document.getElementById(movie.imdbID);
+    if (nomination) {
+      nomination.disabled = false;
+    }
   };
 
   nominate = (movie) => {
@@ -134,7 +138,16 @@ class HomePage extends React.Component {
               })}
             </div>
             <div className="nominations__container">
-              <h2 className="nominations__heading"> Nominations </h2>
+              <div className="nominations__share">
+                <h2 className="nominations__heading"> Nominations </h2>
+                <a
+                  className="nominations__shareLink"
+                  href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fzen-keller-810803.netlify.app%2F"
+                  target="_blank"
+                >
+                  Share on Facebook ?
+                </a>
+              </div>
               {nominations.map((movie) => {
                 return (
                   <Nominations
