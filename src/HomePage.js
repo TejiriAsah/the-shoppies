@@ -36,15 +36,11 @@ class HomePage extends React.Component {
     let filteredMovies = nominatedMovies.filter((nominatedMovie) => {
       return movie.imdbID !== nominatedMovie.imdbID;
     });
-    console.log("filtered", filteredMovies);
 
-    this.setState(
-      {
-        nominatedMovies: filteredMovies,
-        error: "",
-      },
-      console.log("nominated", this.state.nominatedMovies)
-    );
+    this.setState({
+      nominatedMovies: filteredMovies,
+      error: "",
+    });
   };
 
   nominate = (movie) => {
@@ -79,7 +75,6 @@ class HomePage extends React.Component {
         "https://www.omdbapi.com/?apikey=" + api_key + "&type=movie&s=" + movie
       )
       .then((response) => {
-        console.log("your response", response);
         const searchResponse = response.data.Search;
         if (
           typeof searchResponse !== "undefined" &&
@@ -97,7 +92,6 @@ class HomePage extends React.Component {
         }
       })
       .catch((error) => console.log("error", error));
-    console.log("here");
   };
 
   render() {
