@@ -1,3 +1,26 @@
+.movie {
+  &__box {
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+  }
+  &__poster {
+    width: 12.5rem;
+    height: 5rem;
+    object-fit: contain;
+    padding-left: 1rem;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 1.5rem;
+    width: 15rem;
+    border-bottom: 1px solid black;
+  }
+}
+
 .nominate_btn {
   background-color: white;
   border: 2px solid;
@@ -9,27 +32,4 @@
 .nomination-item {
   font-size: 0.9rem;
   box-sizing: border-box;
-}
-.movie-poster {
-  width: 200px;
-  height: 80px;
-  object-fit: contain;
-  padding-left: 1rem;
-}
-.movie-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin-left: 1.5rem;
-  width: 15rem;
-  border-bottom: 1px solid black;
-}
-.movie-box {
-  display: flex;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  box-sizing: border-box;
-}
-.tester {
-  width: 200px;
 }
